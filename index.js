@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
 const session = require('express-session');
+const LokiStore = require('connect-loki')(session);
+
 const port = 3000;
 
 // set the view engine to ejs
@@ -12,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 //express session initc
 app.use(session({
+	store: new LokiStore(),
 	secret: 'het5feladat',
 	resave: false,
 	saveUninitialized: true,
